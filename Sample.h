@@ -18,35 +18,16 @@ class Sample{
         // THIS COPY CONSTRUCTOR DOES NOT WORK, FIX IT!
         // What could we change about this class
         // in order to not NEED this constructor?
-        // ANSWER:
-        // If we got rid of the heap storage (int_pointer)
-        // then we would only need a shallow copy constructor,
-        // which the compiler generates for us
         Sample(Sample const &s){
             // Why can we do this:
             regular_int = s.regular_int;
             // But not this:
             int_pointer = s.int_pointer;
-            // ANSWER:
-            // Since int_pointer is just the LOCATION
-            // of an int on the heap, we don't want to copy
-            // the location! We want to copy the actual int!
-            // My solution:
-            // regular_int = s.regular_int; // this can be copied fine
-            // if(s.int_pointer == nullptr){ // if s isn't allocated, check for it
-            //     int_pointer = nullptr;
-            //     return; // quick exit
-            // }
-            // int_pointer = new int(*(s.int_pointer)); // get the value from s.int_pointer and copy it
         }
 
         // 1.) Where in memory do the "value" parameters reside?
         // 2.) What are the lifetimes of these variables?
         // 3.) What are the inital values of these variables?
-        // ANSWER: 
-        // 1.) Stack memory
-        // 2.) The lifetime of the "change_value" function
-        // 3.) Whatever values are passed in to a "change_value()" call
         void change_value(int value1, int value2){
             regular_int = value2;
             if(int_pointer == nullptr){
